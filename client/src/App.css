@@ -1,0 +1,60 @@
+
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+h3{
+  padding: 15px;
+  font-size: x-large;
+  font-weight: bold;
+  background-color: #e5e5e5;
+  width: 40%;
+  color: black;
+}
+
+img{
+  width: 30%;
+  height: auto;
+}
+.container{
+  width: 40%;
+  margin: auto;
+}
+/* Full width input fields*/
+input[type="text"],
+input[type="datetime-local"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+ 
+input[type="submit"]{
+  width: 30%;
+  padding: 15px;
+  font-weight: bolder;
+  border: none;
+  background: #b4b4bc;
+  cursor: pointer;
+  color: black;
+}
+
+
+@media only screen and (max-width : 620px){
+  .home{
+    margin-top: 50%;
+  }
+  .container{
+    width: 80%;
+    margin: auto;
+  }
+}
