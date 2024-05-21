@@ -1,10 +1,31 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Alert from "./Alert";
 
-function Login(){
-  // const [logindata,setLogindata]=useState({
-  //   email:''
-  // })
+function Login({alert,showAlert}){
+  const [logindata,setLogindata]=useState({
+    email:'',
+    password: ""
+  })
+  const Onchnagehandler = (e) => {
+    setLogindata({
+      ...logindata,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onSubmitHandler= async (e)=>{
+    e.preventDefault()
+    try {
+      const { data } = await axios.post("/api/user/login", logindata);
+    } catch (error) {
+      showAlert({
+        type:"danger",
+        msg:error.response.data.error
+      })
+    }
+  }
     return (
         <>
           <div className="container">
@@ -16,17 +37,17 @@ function Login(){
                   alt="img"
                   style={{ width: "15%" }}
                 />
-                <h1>Tasky Register</h1>
+                <h1>Tasky Login</h1>
               </Link>
               </center>
             </div>
             <div>
-                <form>
-                    
+                <form onSubmit={onSubmitHandler}>
+                
                     <label htmlFor="email"><b>Email:</b></label>
-                    <input type="email" name="email"/>
+                    <input type="email" name="email" onChange={Onchnagehandler}/>
                     <label htmlFor="password"><b>Password:</b></label>
-                    <input type="password" name="password"/>
+                    <input type="password" name="password" onChange={Onchnagehandler}/>
                     <input type="submit" value="Login"></input>
     
                 </form>
