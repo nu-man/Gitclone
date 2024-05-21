@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Login(){
+  const [logindata,setLogindata]=useState({
+    email:''
+  })
     return (
         <>
           <div className="container">
@@ -20,9 +24,9 @@ function Login(){
                 <form>
                     
                     <label htmlFor="email"><b>Email:</b></label>
-                    <input type="email" name="fname"/>
+                    <input type="email" name="email"/>
                     <label htmlFor="password"><b>Password:</b></label>
-                    <input type="text" name="fname"/>
+                    <input type="password" name="password"/>
                     <input type="submit" value="Login"></input>
     
                 </form>

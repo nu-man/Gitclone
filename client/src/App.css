@@ -47,6 +47,14 @@ input[type="submit"]{
   cursor: pointer;
   color: black;
 }
+.alert-success{
+  text-align: center;
+  color: rgb(66, 143, 66);
+}
+.alert-danger{
+  text-align: center;
+  color: red;
+}
 
 
 @media only screen and (max-width : 620px){
