@@ -1,8 +1,12 @@
 import express from "express";
+import "./dbConnect.js"
+import User from './models/Users.js';
 const app = express();
 const port = 5000;
 app.use(express.json()); //body parser
-
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 app.post("/api/user/register", async (req, res) => {
   try {
     const userData = await User.findOne({ email: req.body.email });

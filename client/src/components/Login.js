@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Login(){
-  const [logindata,setLogindata]=useState({
-    email:''
-  })
+  // const [logindata,setLogindata]=useState({
+  //   email:''
+  // })
     return (
         <>
           <div className="container">
