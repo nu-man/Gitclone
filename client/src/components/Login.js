@@ -20,10 +20,11 @@ function Login({alert,showAlert}){
     try {
       const { data } = await axios.post("/api/user/login", logindata);
     } catch (error) {
-      showAlert({
-        type:"danger",
-        msg:error.response.data.error
-      })
+      // showAlert({
+      //   type:"danger",
+      //   msg:error.response.data.error
+      // })
+      console.log(error);
     }
   }
     return (
