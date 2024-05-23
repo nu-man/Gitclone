@@ -1,0 +1,19 @@
+{
+    "DB_URL" :"mongodb+srv://numan:Numan@projects.rcpzybc.mongodb.net/tasky-app",
+    "PORT":5000,
+    "URL": "http://172.17.169.205:5000",
+    "EMAIL_SMTP":{
+        "HOST":"mail.inuman.dev",
+        "AUTH":{
+            "USER":"numan@inuman.dev",
+            "PASS":"Numan@1234"
+        }
+        
+    },
+    "SMS":{
+        "TWILIO_SID":"AC5ff006103982219a79017437f070dc32",
+        "TWILIO_TOKEN":"cdb7e522f54c8aa5fcbb64cebcac566e",
+        "TWILIO_NUMBER":"+12232505276"
+    }
+    
+}

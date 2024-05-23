@@ -1,22 +1,24 @@
 import nodemailer from "nodemailer";
+import config from "config"
 
-async function sendMail(){
+let {HOST,AUTH}=config.get("EMAIL_SMTP")
+async function sendMail(emailData){
     try {
         const transporter = nodemailer.createTransport({
-            host: "mail.inuman.dev",
+            host: HOST,
             port: 465,
             secure: true, 
             auth: {
-              user: "numan@inuman.dev",
-              pass: "Numan@1234",
+              user: AUTH.USER,
+              pass: AUTH.PASS,
             },
           });
           const info = await transporter.sendMail({
-            from: '"Maddison Foo Koch 👻" <numan@inuman.dev>', // sender address
-            to: "mohdnuman198@gmail.com", // list of receivers
-            subject: "nodemailer sent this", // Subject line
-            text: "Hello world?", // plain text body
-            html: "<b>Hello world?</b>", // html body
+            from: '"Tasky App" <numan@inuman.dev>', 
+            to: emailData.to, 
+            subject:emailData.subject,
+            text: "Hello world?", 
+            html: emailData.body, 
           });
         
           console.log("Message sent: %s", info.messageId);
@@ -24,4 +26,4 @@ async function sendMail(){
       console.log(error);  
     }
 }
-sendMail()
+export default sendMail;

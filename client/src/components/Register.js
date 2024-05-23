@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link,useNavigate} from "react-router-dom";
 import { useState } from "react";
 import Alert from "./Alert";
 import axios from "axios"
 
 
 function Register({alert,showAlert}) {
+  let navigate=useNavigate();
   
     const [registerData, setRegisterData] = useState({
       email: "",
@@ -34,6 +35,9 @@ function Register({alert,showAlert}) {
             type:"success",
             msg:data.success
           })
+          setTimeout(() => {
+            navigate("/login",{replace:true});
+          }, 3000);
    
          }
       } catch (error) {
