@@ -19,7 +19,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login alert={alert} showAlert={showAlert}/>} />
           <Route path="/register" element={<Register alert={alert} showAlert={showAlert}/>} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>

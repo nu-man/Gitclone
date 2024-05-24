@@ -1,10 +1,16 @@
-function Alert({alert}){
-    return(
-        <>
-            {alert!==null && (
-                <h4 className={`alert-${alert.type}`}> {alert.msg}</h4>
-            )}
-        </>
-    )
+// Alert.js
+import React from 'react';
+
+function Alert({ alert }) {
+  return (
+    <>
+      {alert && (
+        <div className={`alert alert-${alert.type}`} role="alert">
+          {alert.msg}
+        </div>
+      )}
+    </>
+  );
 }
-export default Alert
+
+export default Alert;
