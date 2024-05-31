@@ -5,9 +5,20 @@ import sendMail from "../../utils/sendMail.js";
 import sendSMS from "../../utils/sendSMS.js";
 import config from "config";
 
+import jwt from "jsonwebtoken"
+
 const router = express.Router();
 
 // Register API
+
+/*
+  API: /api/user/register
+  Desc: User Signup
+  Method: POST
+  Access: Public
+  Validation: email is unique, password strenght
+
+*/ 
 router.post("/register", async (req, res) => {
   try {
     const userData = await User.findOne({ email: req.body.email });
@@ -60,6 +71,15 @@ router.post("/register", async (req, res) => {
 });
 
 //email verification route
+/*
+  API: /api/user/verify/email/:token"
+  Desc: User emali verification
+  Method: GET
+  Access: Public
+  Params: token
+  Validation: token shouldbe valid
+
+*/ 
 router.get("/verify/email/:token", async (req, res) => {
   try {
     let token = req.params.token;
@@ -77,6 +97,15 @@ router.get("/verify/email/:token", async (req, res) => {
 });
 
 //sms verification route
+/*
+  API: /api/user/verify/sms/:token"
+  Desc: User phone verification
+  Method: GET
+  Access: Public
+  Params: token
+  Validation: token shouldbe valid
+
+*/ 
 router.get("/verify/sms/:token", async (req, res) => {
   try {
     let token = req.params.token;
@@ -93,12 +122,39 @@ router.get("/verify/sms/:token", async (req, res) => {
   }
 });
 
-// login logic
 
+/*
+login logic
+  API: /api/user/login"
+  Desc: User login
+  Method: POST
+  Access: Public
+  Params: token
+  Validation: valid email and pass
 
+*/ 
 
-
-
+router.post("/login", async (req, res) => {
+  try {
+    const found=await User.findOne({email:req.body.email})
+    if(!found) {
+      return res.status(401).json({error:"Invalid credentials "})
+    }
+    let match= await bcrypt.compare(req.body.password, found.password)
+    if(!match){
+      return res.status(401).json({error:"Invalid credentials "})
+    }
+    let payload={
+      user_id: found._id,
+      email: found.email
+    }
+    let token=jwt.sign(payload,config.get("SECRET_KEYS.JWT"),{expiresIn:"1hr"})
+    res.status(200).json({success:"Valid token",token})
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error. Try again." });
+  }
+});
 
 
 

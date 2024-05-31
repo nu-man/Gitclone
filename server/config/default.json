@@ -14,6 +14,9 @@
         "TWILIO_SID":"AC5ff006103982219a79017437f070dc32",
         "TWILIO_TOKEN":"cdb7e522f54c8aa5fcbb64cebcac566e",
         "TWILIO_NUMBER":"+12232505276"
+    },
+    "SECRET_KEYS":{
+        "JWT" : "TASKYAPP"
     }
     
 }
