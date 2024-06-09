@@ -158,7 +158,27 @@ router.post("/login", async (req, res) => {
 
 
 
+/*
+  API: /api/user/auth"
+  Desc: jwt token auth
+  Method: POST
+  Access: Public
+  Params: token
+  Validation: valid token
 
+*/ 
+
+router.get("/auth", async (req, res) => {
+  try {
+         
+        let decoded=jwt.verify(req.headers["auth-token"],config.get("SECRET_KEYS.JWT"))
+        res.status(200).json({user_id:decoded.user_id})
+        //console.log(decoded);
+  } catch (error) {
+    console.log(error);
+    res.status(401).json({ error: "Unauthorized or token expired." });
+  }
+});
 
 
 
