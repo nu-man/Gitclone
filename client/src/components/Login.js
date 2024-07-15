@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Alert from "./Alert";
 
 function Login({ alert, showAlert }) {
   let navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, []);
   const [logindata, setLogindata] = useState({
     email: "",
     password: "",
