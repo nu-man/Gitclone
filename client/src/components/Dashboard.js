@@ -44,12 +44,49 @@ function Dashboard({ loading, showloading }) {
       </div>
       <div style={{ overflow: "auto" }}>
         <div className="main">
-          <h2>Lorem Ipsum</h2>
-          <p>
-            {" "}
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna.
-          </p>
+          <h2>Schedule New Tasks</h2>
+          <hr></hr>
+          <form>
+            <label htmlFor="taskname">
+              <b>Task Name</b>
+            </label>
+            <br />
+            <input
+              type="text"
+              placeholder="Enter task name"
+              name="taskname"
+            ></input>
+            <label htmlFor="deadline">
+              <b>Deadline</b>
+            </label>
+            <br />
+            <br />
+            <input
+              type="datetime-local"
+              placeholder="Enter task deadline"
+              name="deadline"
+            ></input>
+            <br />
+            <label htmlFor="notificatonType">
+              <b>Notification Type</b>
+            </label>
+            <br />
+            <select name="notificatonType">
+              <option value="Choose your notification type"></option>
+              <option value="SMS"></option>
+              <option value="Email"></option>
+              <option value="Both"></option>
+            </select>
+            <hr></hr>
+            <input type="checkbox"
+            name="agree"></input>
+            <label htmlFor="agree">
+                By clicking Schedule Job Button below, you agree to recieve emails and mesages as reminder notiications.
+
+            </label><br/>
+            <br/><br/>
+            <input type="submit" value="Schedule Job"></input>
+          </form>
         </div>
         <div className="menu">
           <Link to="/">Link 1</Link>

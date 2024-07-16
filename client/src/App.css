@@ -66,6 +66,7 @@ input[type="submit"]{
     margin: auto;
   }
 }
+
 .menu {
   float: left;
   width: 20%;
@@ -79,10 +80,12 @@ input[type="submit"]{
   display: block;
   width: 100%;
   color: black;
+  cursor: pointer;
 }
 
 .main {
   float: left;
   width: 60%;
   padding: 0 20px;
+  cursor: pointer;
 }
