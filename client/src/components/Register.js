@@ -2,9 +2,10 @@ import { Link,useNavigate} from "react-router-dom";
 import { useState } from "react";
 import Alert from "./Alert";
 import axios from "axios"
+import Loading from "./Loading";
 
 
-function Register({alert,showAlert}) {
+function Register({alert,showAlert,loading,showloading}) {
   let navigate=useNavigate();
   
     const [registerData, setRegisterData] = useState({
@@ -30,7 +31,9 @@ function Register({alert,showAlert}) {
            msg:"Passwords do not match"
           })
          }else{
+          showloading(true)
           const { data } = await axios.post("/api/user/register", registerData);
+          showloading(false)
           showAlert({
             type:"success",
             msg:data.success
@@ -45,6 +48,7 @@ function Register({alert,showAlert}) {
           type:"danger",
           msg:error.response.data.error
         })
+        showloading(false)
         
       }
     }
@@ -60,6 +64,7 @@ function Register({alert,showAlert}) {
               style={{ width: "15%" }}
             />
             <h1>Tasky Register</h1>
+            {loading && <Loading/>}
           </Link>
           </center>
         </div>

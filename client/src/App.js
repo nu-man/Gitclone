@@ -11,6 +11,7 @@ import axios from "axios";
 function App() {
   const [alert, setAlert] = useState(null);
   const [auth, setAuth] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const showAlert = (alert) => {
     setAlert(alert);
@@ -24,10 +25,9 @@ function App() {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          const { data } = await axios.get("/api/user/auth", {
+          await axios.get("/api/user/auth", {
             headers: { "auth-token": token },
           });
-          console.log(data);
           setAuth(true);
         } else {
           setAuth(false);
@@ -36,8 +36,13 @@ function App() {
         console.log(error);
       }
     }
+
     verifytoken();
   }, []);
+
+  const showloading = (status) => {
+    setLoading(status);
+  };
 
   return (
     <>
@@ -46,19 +51,38 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route
             path="/login"
-            element={<Login alert={alert} showAlert={showAlert} />}
+            element={
+              <Login
+                alert={alert}
+                showAlert={showAlert}
+                loading={loading}
+                showloading={showloading}
+              />
+            }
           />
           <Route
             path="/register"
-            element={<Register alert={alert} showAlert={showAlert} />}
+            element={
+              <Register
+                alert={alert}
+                showAlert={showAlert}
+                loading={loading}
+                showloading={showloading}
+              />
+            }
           />
           <Route element={<PrivateRoutes auth={auth} />}>
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+              path="/dashboard"
+              element={
+                <Dashboard loading={loading} showloading={showloading} />
+              }
+            />
           </Route>
         </Routes>
       </BrowserRouter>
     </>
   );
 }
-//console.log("all ok")
+
 export default App;

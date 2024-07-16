@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Alert from "./Alert";
+import Loading from "./Loading";
 
-function Login({ alert, showAlert }) {
+function Login({ alert, showAlert, loading, showloading}) {
   let navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigate("/dashboard", { replace: true });
     }
+    // eslint-disable-next-line
   }, []);
   const [logindata, setLogindata] = useState({
     email: "",
@@ -25,7 +27,9 @@ function Login({ alert, showAlert }) {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
+      showloading(true)
       const { data } = await axios.post("/api/user/login", logindata);
+      showloading(false)
       localStorage.setItem("token", data.token);
       showAlert({
         type: "success",
@@ -40,6 +44,7 @@ function Login({ alert, showAlert }) {
         type: "danger",
         msg: error.response.data.error,
       });
+      showloading(false)
       console.log(error);
     }
   };
@@ -55,6 +60,7 @@ function Login({ alert, showAlert }) {
               style={{ width: "15%" }}
             />
             <h1>Tasky Login</h1>
+            {loading && <Loading/>}
           </Link>
         </center>
       </div>
