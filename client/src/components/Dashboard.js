@@ -9,8 +9,9 @@ function Dashboard({ loading, showloading }) {
     taskname: "",
     deadline: "",
     notificatonType: "",
-    agree: "",
+    agree:false,
   });
+  const[disable,setDisable]=useState(true)
   const logout = () => {
     localStorage.removeItem("token");
     navigate("/login");
@@ -19,7 +20,7 @@ function Dashboard({ loading, showloading }) {
     async function fetchuser() {
       try {
         showloading(true);
-        const { data } = await axios.get("./api/user/auth", {
+        const { data } = await axios.get("/api/user/auth", {
           headers: {
             "auth-token": localStorage.getItem("token"),
           },
@@ -37,10 +38,18 @@ function Dashboard({ loading, showloading }) {
   }, []);
 
   const Onchnagehandler = (e) => {
-    setTaskData({
-      ...taskData,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === "agree") {
+      setTaskData({
+        ...taskData,
+        [e.target.name]: e.target.checked,
+      });
+      e.target.checked? setDisable(false):setDisable(true)
+    } else {
+      setTaskData({
+        ...taskData,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   const onSubmitHandler = async (e) => {
@@ -92,16 +101,14 @@ function Dashboard({ loading, showloading }) {
             </label>
             <br />
             <select name="notificatonType" onChange={Onchnagehandler}>
-              <option
-                value="Choose your notification type"
-                onChange={Onchnagehandler}
-              ></option>
-              <option value="SMS" onChange={Onchnagehandler}></option>
-              <option value="Email" onChange={Onchnagehandler}></option>
-              <option value="Both" onChange={Onchnagehandler}></option>
+              <option value="Choose your notification type"></option>
+              <option value="SMS"></option>
+              <option value="Email"></option>
+              <option value="Both"></option>
             </select>
             <hr></hr>
-            <input type="checkbox" name="agree"></input>
+            <input type="checkbox" name="agree"
+            onChange={Onchnagehandler}></input>
             <label htmlFor="agree">
               By clicking Schedule Job Button below, you agree to recieve emails
               and mesages as reminder notiications.
@@ -109,7 +116,7 @@ function Dashboard({ loading, showloading }) {
             <br />
             <br />
             <br />
-            <input type="submit" value="Schedule Job"></input>
+            <input type="submit" value="Schedule Job" disabled={disable}></input>
           </form>
         </div>
         <div className="menu">
