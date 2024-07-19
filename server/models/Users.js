@@ -36,6 +36,23 @@ const UserSchema = new mongoose.Schema({
       default: false,
     },
   },
+  tasks:[
+    {
+      taskname:{
+        type:String,
+        required:true
+      },
+      deadline:{
+        type:String,
+        required:true
+      },
+      notificationType:{
+        type:String,
+        required:true
+      },
+    }
+  ]
+
 });
 
 const User = mongoose.model("User", UserSchema, "Users");
